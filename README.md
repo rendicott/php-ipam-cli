@@ -2,6 +2,7 @@
 "IP better with pySser"
 
 Latest version: 1.0
+Author: Rendicott@gmail.com
 
 Script to interact with the [phpIpam](http://phpipam.net/) [API](http://phpipam.net/api-documentation/). 
 
