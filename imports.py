@@ -100,6 +100,10 @@ def import_addresses(settings, session, options):
                     c_description = line.get('Description')
                 except:
                     c_description = ''
+                try:
+                    c_mac = line.get('mac')
+                except:
+                    c_mac = ''
                 if c_status.lower() == 'used' or c_status.lower() == 'dhcp':
                     local_custom_attributes = list()
                     # process global custom attributes and set up default values for the object properties
@@ -135,6 +139,8 @@ def import_addresses(settings, session, options):
                             s_addr.hostname = c_hostname
                         if c_description is not '':
                             s_addr.description = c_description
+                        if c_mac is not '':
+                            s_addr.mac = c_mac
                         s_addr.process_short_name()  # try to get short name from an FQDN
                     elif c_status.lower() == 'dhcp':
                         s_addr.hostname = 'DHCP'
