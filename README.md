@@ -13,6 +13,9 @@ Script to interact with the [phpIpam](http://phpipam.net/) [API](http://phpipam.
 - Delete subnets from phpIpam
 - Claim and Release IP's with script parameters
 
+## Updates
+- 20160721_Added mac address field support on import address.
+
 ## PreReqs
 Needs Python 2.7 and Requests
 
@@ -272,10 +275,11 @@ That would be good enough for working with existing inventory but if you wanted 
 
 ```
 
-Ip,Name,Metadata,Description,ReservedBy,ReservedOn,IsProduction,IsTaken,cstm_experimental
-10.119.125.0,,SUBNET ADDRESS,,,,,,1
-10.119.125.1,,USED, ,,,,,1
-10.119.125.2,,AVAILABLE,,,,,,1
+Ip,Name,Metadata,Description,mac,cstm_experimental
+10.119.125.0,,SUBNET ADDRESS,,1
+10.119.125.1,,USED,,1
+10.119.125.2,,AVAILABLE,,1
+10.119.125.3,,USED,awesome box,00:45:EF:1A:6C:AD,0
 
 
 ```
@@ -310,33 +314,33 @@ If there are custom attributes specified in the config INI file then the importe
 
 ```
 
-Ip,Name,Metadata,Description,ReservedBy,ReservedOn,IsProduction,IsTaken,cdl_isprod,cdl_autodelete,cdl_dhcp
-10.119.125.0,,SUBNET ADDRESS,,,,,,1,0,0
-10.119.125.1,,USED, ,,,,,1,0,0
-10.119.125.2,,AVAILABLE,,,,,,1,0,0
-10.119.125.198,FBUATLISTENER.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.199,VMFBUATPORTAL03.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.200,JSHPSAN01.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.201,JSHPSAN01.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.202,Z011.CDL.COM,USED,,,,,,1,0,0
-10.119.125.203,Z012.CDL.COM,USED,,,,,,1,0,0
-10.119.125.204,Z013.CDL.COM,USED,,,,,,1,0,0
-10.119.125.205,Z014.CDL.COM,USED,,,,,,1,0,0
-10.119.125.206,Z015.CDL.COM,USED,,,,,,1,0,0
-10.119.125.207,Z016.CDL.COM,USED,,,,,,1,0,0
-10.119.125.208,Z017.CDL.COM,USED,,,,,,1,0,0
-10.119.125.209,Z018.CDL.COM,USED,,,,,,1,0,0
-10.119.125.210,JSESXHOST09.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.211,Z019.CDL.COM,USED,,,,,,1,0,0
-10.119.125.212,JTHOMAS-LT.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.213,JSDEVQAEDWSQL01.CL.LOCAL,USED,,,,,,1,0,0
-10.119.125.214,Z021.CDL.COM,USED,,,,,,1,0,0
-10.119.125.215,Z022.CDL.COM,USED,,,,,,1,0,0
-10.119.125.216,DONAG0.CL.LOCAL,USED,DevOps Nagios build/test used by Bamboo,,,,,1,0,0
-10.119.125.217,DONAG1.CL.LOCAL,USED,DevOps Nagios VM,,,,,1,0,0
-10.119.125.218,DOPUP1.CL.LOCAL,USED,DevOps Puppet Experiment,,,,,1,0,0
-10.119.125.219,CLSTASH01.CL.LOCAL,USED,New Stash server as of 20150908,,,,,1,0,0
-10.119.125.220,DOGRAPH1,USED,DevOps Graphite data collection app/db server,,,,,1,0,0
+Ip,Name,Metadata,Description,ReservedBy,ReservedOn,IsProduction,IsTaken,cdl_isprod,cdl_autodelete,cdl_dhcp,mac
+10.119.125.0,,SUBNET ADDRESS,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.1,,USED, ,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.2,,AVAILABLE,,,,,,1,0,0,
+10.119.125.198,FBUATLISTENER.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.199,VMFBUATPORTAL03.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.200,JSHPSAN01.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.201,JSHPSAN01.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.202,Z011.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.203,Z012.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.204,Z013.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.205,Z014.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.206,Z015.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.207,Z016.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.208,Z017.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.209,Z018.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.210,JSESXHOST09.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.211,Z019.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.212,JSMITH-LT.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.213,JSDEVQAEDWSQL01.CL.LOCAL,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.214,Z021.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.215,Z022.CDL.COM,USED,,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.216,DONAG0.CL.LOCAL,USED,DevOps Nagios build/test used by Bamboo,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.217,DONAG1.CL.LOCAL,USED,DevOps Nagios VM,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.218,DOPUP1.CL.LOCAL,USED,DevOps Puppet Experiment,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.219,CLSTASH01.CL.LOCAL,USED,New Stash server as of 20150908,,,,,1,0,0,00:45:EF:1A:6C:AD
+10.119.125.220,DOGRAPH1,USED,DevOps Graphite data collection app/db server,,,,,1,0,0,00:45:EF:1A:6C:AD
 ....
 
 ```
