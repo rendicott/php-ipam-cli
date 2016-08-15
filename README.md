@@ -19,7 +19,8 @@ Script to interact with the [phpIpam](http://phpipam.net/) [API](http://phpipam.
 ## PreReqs
 Needs Python 2.7 and Requests
 
-` pip install requests `
+20160815_NOTE: I noticed something in requests 2.11 breaks so until I can fix 2.10 works fine. 
+` pip install requests==2.10.0 `
 
 > **NOTE**: (Tested against phpIpam v1.2)
 
