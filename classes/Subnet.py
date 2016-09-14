@@ -113,10 +113,11 @@ class Subnet:
         :param stringer:
         :return:
         """
-        split_subnet = stringer.split('/')
-        self.subnet = split_subnet[0]
         try:
+            split_subnet = stringer.split('/')
+            self.subnet = split_subnet[0]
             self.mask = split_subnet[1]
         except:
             # default to 24
+            self.subnet = stringer
             self.mask = '24'
