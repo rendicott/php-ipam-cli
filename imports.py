@@ -45,10 +45,10 @@ def import_subnets(settings, session, options):
     logging.debug('------- ENTERING FUNCTION: import_subnets() -------')
     url_subnets = settings.url_app + '/subnets/'
     logging.debug(url_subnets)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshness
+               'token': str(session.token)  # calling token will auto-validate freshness
                }
     with open(options.subnetfile, 'rb') as csvfile:
         f = csv.reader(csvfile, delimiter=',')
@@ -83,10 +83,10 @@ def import_addresses(settings, session, options):
     logging.debug('------- ENTERING FUNCTION: import_addresses() -------')
     url_addresses = settings.url_app + '/addresses/'
     logging.debug(url_addresses)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     with open(options.addressfile, 'rb') as csvfile:
         f = csv.DictReader(csvfile)
