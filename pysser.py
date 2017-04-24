@@ -69,7 +69,6 @@ def authenticate(settings, session):
             return session
     except:
         # build our headers and perform basic authentication via user/pass
-        #headers = {'app_id': str(settings.app), 'Content-Type': 'application/json'}
         headers = {'Content-Type': 'application/json'}
         r = requests.post(settings.url_user,
                           headers=headers,
@@ -652,7 +651,7 @@ def group_by_hostname(list_addresses):
     for item in list(set([x for x in hostnames if hostnames.count(x) > 1])):
         hostnames_duplicated.append(item)
 
-    # now we have a list of those hostnames which have duplicates so we 
+    # now we have a list of those hostnames which have duplicates so we
     # go through and find out the address IDs for those hostnames
     count = 0
     for hostname in hostnames_duplicated:
@@ -1054,5 +1053,4 @@ if __name__ == '__main__':
         logging.error(msg)
         print(msg)
         sys.exit(1)
-        
     main(options)
