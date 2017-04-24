@@ -126,11 +126,11 @@ def load_subnets(settings, session):
     logging.debug('------- ENTERING FUNCTION: load_subnets() -------')
     url_subnets = ('%s/sections/%s/subnets/' % (settings.url_app, session.default_section_id))
     logging.debug('url_subnets: ' + url_subnets)
-    headers = { 'app_id': str(settings.app),
-                'Content-Type': 'application/json',
-                'content': 'application/json',
-                'token': str(session.token)  # calling token will auto-validate freshness
-            }
+    headers = {'app_id': str(settings.app),
+               'Content-Type': 'application/json',
+               'content': 'application/json',
+               'token': str(session.token)  # calling token will auto-validate freshness
+              }
     r = requests.get(url_subnets, headers=headers, verify=False)
     try:
         if r.json().get('success'):
