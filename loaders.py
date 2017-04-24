@@ -22,10 +22,10 @@ def load_addresses(settings, session, filter_subnet=None):
     logging.debug('------- ENTERING FUNCTION: load_addresses() -------')
     url_subnets = ('%s/subnets/' % settings.url_app)
     headers = {
-                'app_id': settings.app,
+                'app_id': str(settings.app),
                 'Content-Type': 'application/json',
                 'content': 'application/json',
-                'token': session.token  # calling token will auto-validate freshness
+                'token': str(session.token)  # calling token will auto-validate freshness
             }
     for subnet in session.subnets:
         if filter_subnet:
@@ -126,11 +126,11 @@ def load_subnets(settings, session):
     logging.debug('------- ENTERING FUNCTION: load_subnets() -------')
     url_subnets = ('%s/sections/%s/subnets/' % (settings.url_app, session.default_section_id))
     logging.debug('url_subnets: ' + url_subnets)
-    headers = { 'app_id': settings.app,
-                'Content-Type': 'application/json',
-                'content': 'application/json',
-                'token': session.token  # calling token will auto-validate freshness
-            }
+    headers = {'app_id': str(settings.app),
+               'Content-Type': 'application/json',
+               'content': 'application/json',
+               'token': str(session.token)  # calling token will auto-validate freshness
+              }
     r = requests.get(url_subnets, headers=headers, verify=False)
     try:
         if r.json().get('success'):
@@ -201,9 +201,9 @@ def load_sections(settings, session):
     logging.debug('------- ENTERING FUNCTION: load_sections() -------')
     url_sections = settings.url_app + '/sections/'
     headers = {
-                'app_id': settings.app,
+                'app_id': str(settings.app),
                 'Content-Type': 'application/json',
-                'token': session.token  # calling token will auto-validate freshenss
+                'token': str(session.token)  # calling token will auto-validate freshenss
                 }
 
     r = requests.get(url_sections, headers=headers, verify=False)

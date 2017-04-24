@@ -69,13 +69,13 @@ def authenticate(settings, session):
             return session
     except:
         # build our headers and perform basic authentication via user/pass
-        headers = {'app_id': settings.app, 'Content-Type': 'application/json'}
+        headers = {'Content-Type': 'application/json'}
         r = requests.post(settings.url_user,
                           headers=headers,
                           verify=False,
                           auth=HTTPBasicAuth(
-                              settings.username,
-                              settings.password
+                              str(settings.username),
+                              str(settings.password)
                           )
                           )
         string_token = str(r.json().get('data').get('token'))
@@ -93,11 +93,11 @@ def create_section(settings, session):
     """
     pass
     '''
-    url_sections = settings.url_app + '/sections/'
-    headers = {'app_id': settings.app,
+    url_sections = str(settings.url_app) + '/sections/'
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     newSection = Section('Automation')
     newSection.permissions = ('{"2":"2","3":"1"}')
@@ -207,12 +207,12 @@ def create_subnet_test(settings, session):
     :param session:
     :return: None
     """
-    url_section = settings.url_app + '/subnets/'
+    url_section = str(settings.url_app) + '/subnets/'
     logging.debug(url_section)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     s_test = Subnet('192.168.2.0/24')
     s_test.sectionId = session.default_section_id
@@ -316,12 +316,12 @@ def claim_address(settings, session, claimipstring, capsv):
     :return:
     """
     logging.debug('------- ENTERING FUNCTION: claim_address() -------')
-    url_addresses = settings.url_app + '/addresses/'
+    url_addresses = str(settings.url_app) + '/addresses/'
     logging.debug(url_addresses)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     '''
     Syntax for claiming IP via API:
@@ -407,12 +407,12 @@ def modify_address(settings, session, modipstring, capsv):
     :return:
     """
     logging.debug('------- ENTERING FUNCTION: modify_address() -------')
-    url_addresses = settings.url_app + '/addresses/'
+    url_addresses = str(settings.url_app) + '/addresses/'
     logging.debug(url_addresses)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     '''
     Syntax for modifying IP via API:
@@ -488,13 +488,13 @@ def release_address(settings, session, releaseipstring):
     :return:
     """
     logging.debug('------- ENTERING FUNCTION: release_address() -------')
-    url_addresses = settings.url_app + '/addresses/'
-    url_search_base = url_addresses + "search/"
+    url_addresses = str(settings.url_app) + '/addresses/'
+    url_search_base = str(url_addresses) + 'search/'
     logging.debug(url_addresses)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     '''
     Syntax for deleting IP via API:
@@ -651,7 +651,7 @@ def group_by_hostname(list_addresses):
     for item in list(set([x for x in hostnames if hostnames.count(x) > 1])):
         hostnames_duplicated.append(item)
 
-    # now we have a list of those hostnames which have duplicates so we 
+    # now we have a list of those hostnames which have duplicates so we
     # go through and find out the address IDs for those hostnames
     count = 0
     for hostname in hostnames_duplicated:
@@ -726,12 +726,12 @@ def delete_subnets(settings, session):
     logging.info("Decision was: '%s'" % decision)
     if decision == 'y':
         logging.debug('------- ENTERING FUNCTION: delete_subnets() -------')
-        url_subnets = '%s/subnets/' % settings.url_app
+        url_subnets = '%s/subnets/' % str(settings.url_app)
         logging.debug('url_subnets: ' + url_subnets)
-        headers = {'app_id': settings.app,
+        headers = {'app_id': str(settings.app),
                    'Content-Type': 'application/json',
                    'content': 'application/json',
-                   'token': session.token  # calling token will auto-validate freshenss
+                   'token': str(session.token)  # calling token will auto-validate freshenss
                    }
         try:
             if len(session.subnets) >= 1:
@@ -763,12 +763,12 @@ def first_available(settings, session, hoststring, capsv):
     #  INTERNAL: Build claimIp request
     #  REST: claim IP
     logging.debug('------- ENTERING FUNCTION: first_available() -------')
-    url_subnets = settings.url_app + '/subnets/'
+    url_subnets = str(settings.url_app) + '/subnets/'
     logging.debug(url_subnets)
-    headers = {'app_id': settings.app,
+    headers = {'app_id': str(settings.app),
                'Content-Type': 'application/json',
                'content': 'application/json',
-               'token': session.token  # calling token will auto-validate freshenss
+               'token': str(session.token)  # calling token will auto-validate freshenss
                }
     if session.hostname_validation:
         if not valid_hostname(hoststring):
@@ -1053,5 +1053,4 @@ if __name__ == '__main__':
         logging.error(msg)
         print(msg)
         sys.exit(1)
-        
     main(options)
