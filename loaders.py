@@ -130,7 +130,7 @@ def load_subnets(settings, session):
                'Content-Type': 'application/json',
                'content': 'application/json',
                'token': str(session.token)  # calling token will auto-validate freshness
-              }
+               }
     r = requests.get(url_subnets, headers=headers, verify=False)
     try:
         if r.json().get('success'):
