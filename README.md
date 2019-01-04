@@ -269,7 +269,7 @@ attribute_desired_value: 0
 
 That would be good enough for working with existing inventory but if you wanted to import and bulk load your custom attributes you would need to make your csv look like this:
 
-'iventory.csv'
+'inventory.csv'
 
 ```
 
