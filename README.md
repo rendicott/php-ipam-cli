@@ -1,5 +1,5 @@
-# pySser
-"IP better with pySser"
+# php-ipam-cli
+Manage your php-ipam system with a CLI tool. 
 
 Latest version: 1.0
 Author: Rendicott@gmail.com
